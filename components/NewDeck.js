@@ -1,21 +1,48 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { black, white } from '../utils/colors';
+import { black, white } from '../utils/colors'
+import t from 'tcomb-form-native'
+
+const Form = t.form.Form;
+
+const label = 'Deck Title'
+
+const deckTitle = t.struct({
+  [label]: t.String
+})
+
+const optionsForm = {
+  fields: {
+    title: {
+      error: 'The title can not be empty'
+    }
+  },
+  auto: 'placeholders'
+}
 
 class NewDeck extends Component {
-  onSubmit = () => {
+
+  handleSubmit = () => {
     //SAVE DATA FIRST
-    this.props.navigation.navigate('DecksList')
+    const value = this._form.getValue() // use that ref to get the form value
+    console.log('value: ', value)
+    //this.props.navigation.navigate('DecksList')
   }
+  
   render() {
     return (
-      <View style={styles.center}>
-        <Text>
+      <View style={styles.center} >
+        <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12}}>
           What is the title of your new deck?
         </Text>
-        <TextInput placeholder="Deck Title"/>
-        <TouchableOpacity style={styles.button}
-          onPress={this.onSubmit}>
+        <Form 
+          style={styles.form}
+          ref={form => this._form = form}
+          type={deckTitle}
+          options={optionsForm} />
+        <TouchableOpacity 
+          style={[styles.button]}
+          onPress={this.handleSubmit}>
           <Text style={styles.buttonText}>
             Submit
           </Text>
@@ -33,9 +60,9 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
+    //alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
   },
   button: {
     padding: 10,
