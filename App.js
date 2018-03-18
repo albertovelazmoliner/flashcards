@@ -1,14 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform, SafeAreaView } from 'react-native'
+import { TabNavigator } from 'react-navigation'
+import DecksList from './components/DecksList'
+import NewDeck from './components/NewDeck'
+import { white, blue } from './utils/colors'
+import { Ionicons } from '@expo/vector-icons'
+
+const Tabs = TabNavigator({
+  DecksList: {
+    screen: DecksList,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-card' size={30} color={tintColor} />
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add' size={30} color={tintColor} />
+    }
+  }
+}, {
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: Platform.OS === 'ios' ? blue : white,
+      style: {
+        height: 56,
+        backgroundColor: Platform.OS === 'ios' ? white : blue,
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
+    }
+  }
+)
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <SafeAreaView style={styles.safeArea}>
+        <Tabs />
+      </SafeAreaView>
     );
   }
 }
@@ -20,4 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  safeArea: {
+    flex: 1
+  }
 });
