@@ -26,16 +26,13 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
     marginBottom: 10,
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 2,
-    height: 60,
+    height: 80,
     borderRadius: 5
   }
 })
