@@ -1,32 +1,37 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, StyleSheet } from 'react-native'
 import DeckItem from './DeckItem';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { white } from '../utils/colors'
 
 const mockData = {
-  React: {
-    title: "React",
-    questions:[
-      {
-        question: "What is JSX?",
-        answer: "JSX is a shorthand for JavaScript XML. This is a type of file used by React which utilizes the expressiveness of JavaScript along with HTML like template syntax."
-      }
-    ]
-  },
-  JavaScript: {
-    title: "JavaScript",
-    questions:[
-      {
-        question: "What is NaN? ",
-        answer: "The NaN property represents a value that is “not a number”. This special value results from an operation that could not be performed either because one of the operands was non-numeric (e.g., \"abc\" / 4), or because the result of the operation is non-numeric."
-      }
-    ]
-  } 
+  // React: {
+  //   title: "React",
+  //   questions:[
+  //     {
+  //       question: "What is JSX?",
+  //       answer: "JSX is a shorthand for JavaScript XML. This is a type of file used by React which utilizes the expressiveness of JavaScript along with HTML like template syntax."
+  //     }
+  //   ]
+  // },
+  // JavaScript: {
+  //   title: "JavaScript",
+  //   questions:[
+  //     {
+  //       question: "What is NaN? ",
+  //       answer: "The NaN property represents a value that is “not a number”. This special value results from an operation that could not be performed either because one of the operands was non-numeric (e.g., \"abc\" / 4), or because the result of the operation is non-numeric."
+  //     }
+  //   ]
+  // } 
 }
 
 const emptyComponent = () => {
   return (
-    <View>
-      No Decks created yet
+    <View style={styles.center}>
+      <MaterialCommunityIcons name='cards' size={60}/>
+      <Text style={{fontSize: 30}}>
+        No Decks created
+      </Text>
     </View>
   )
 }
@@ -53,5 +58,15 @@ class DecksList extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:'50%'
+  }
+})
 
 export default DecksList
