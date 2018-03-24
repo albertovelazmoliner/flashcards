@@ -5,6 +5,9 @@ import DecksList from './components/DecksList'
 import NewDeck from './components/NewDeck'
 import { white, blue } from './utils/colors'
 import { Ionicons } from '@expo/vector-icons'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -45,9 +48,11 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <SafeAreaView style={styles.safeArea}>
-        <Tabs />
-      </SafeAreaView>
+      <Provider store={createStore(reducer)}>
+        <SafeAreaView style={styles.safeArea}>
+          <Tabs />
+        </SafeAreaView>
+      </Provider>
     );
   }
 }
