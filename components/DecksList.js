@@ -32,6 +32,10 @@ class DecksList extends Component {
     //AsyncStorage.clear()
   }
 
+  onPressItem = (deck) => {
+    console.log(deck)
+  }
+
   render() {
     const { decks } = this.props
     console.log(decks)
