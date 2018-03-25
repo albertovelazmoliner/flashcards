@@ -10,7 +10,13 @@ class DeckItem extends Component {
   }
 
   render() {
+    
     const {title, questions} = this.props.deck
+
+    _onPress = () => {
+      
+    }
+
     return (
       <TouchableOpacity onPress={this._onPress}>
         <View style={[styles.card, {backgroundColor: white}]}>
