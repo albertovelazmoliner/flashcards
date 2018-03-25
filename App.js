@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import { Constants } from 'expo'
 
 const Tabs = TabNavigator({
   DecksList: {
