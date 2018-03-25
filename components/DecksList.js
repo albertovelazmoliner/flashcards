@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
 import { receiveDecks } from '../actions'
 import { connect } from 'react-redux'
+import { StackNavigator } from 'react-navigation'
 
 const emptyComponent = () => {
   return (
@@ -48,6 +49,7 @@ class DecksList extends Component {
             <DeckItem 
               key={item.title}
               deck={item}
+              onPress={this.onPressItem}
             />
           }
           ListEmptyComponent={emptyComponent}

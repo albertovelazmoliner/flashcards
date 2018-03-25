@@ -6,19 +6,16 @@ import { white } from '../utils/colors'
 class DeckItem extends Component {
 
   static propTypes = {
-    deck: PropTypes.object.isRequired
+    deck: PropTypes.object.isRequired,
+    onPress: PropTypes.func.isRequired
   }
 
   render() {
-    
-    const {title, questions} = this.props.deck
-
-    _onPress = () => {
-      
-    }
+    const { deck } = this.props
+    const {title, questions} = deck
 
     return (
-      <TouchableOpacity onPress={this._onPress}>
+      <TouchableOpacity onPress={() => this.props.onPress(deck)}>
         <View style={[styles.card, {backgroundColor: white}]}>
           <Text>{title}</Text>
           <Text>
