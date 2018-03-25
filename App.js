@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform, SafeAreaView } from 'react-native'
+import { StyleSheet,
 import { TabNavigator } from 'react-navigation'
 import DecksList from './components/DecksList'
 import NewDeck from './components/NewDeck'
