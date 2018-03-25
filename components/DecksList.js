@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, AsyncStorage } from 'react-native'
-import DeckItem from './DeckItem';
+import DeckItem from './DeckItem'
 import { getDecks } from '../utils/api' 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
-import { receiveDecks } from '../actions';
+import { receiveDecks } from '../actions'
 import { connect } from 'react-redux'
 
 const emptyComponent = () => {
