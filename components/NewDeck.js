@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
 import { black, white } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { saveDeck } from '../utils/api'
@@ -41,7 +41,7 @@ class NewDeck extends Component {
   
   render() {
     return (
-      <View style={styles.center} >
+      <View style={[styles.center]} >
         <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12}}>
           What is the title of your new deck?
         </Text>
