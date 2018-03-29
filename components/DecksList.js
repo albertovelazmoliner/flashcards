@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet, AsyncStorage } from 'react-native'
+import { View, Text, FlatList, StyleSheet, AsyncStorage, StatusBar } from 'react-native'
 import DeckItem from './DeckItem'
 import { getDecks } from '../utils/api' 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
 import { receiveDecks } from '../actions'
 import { connect } from 'react-redux'
-import { StackNavigator } from 'react-navigation'
+import { Constants } from 'expo'
 
 const emptyComponent = () => {
   return (
@@ -35,6 +35,7 @@ class DecksList extends Component {
 
   onPressItem = (deck) => {
     console.log(deck)
+    this.props.navigation.navigate('Deck', { deck })
   }
 
   render() {
