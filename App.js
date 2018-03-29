@@ -3,11 +3,11 @@ import { StyleSheet,
          Text,
          View,
          Platform,
-         SafeAreaView,
          StatusBar } from 'react-native'
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import DecksList from './components/DecksList'
 import NewDeck from './components/NewDeck'
+import Deck from './components/Deck'
 import { white, blue } from './utils/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { createStore } from 'redux'
@@ -22,6 +22,8 @@ function FlashcardsStatusBar ( {backgroundColor, ...props}) {
     </View>
   )
 }
+
+
 const Tabs = TabNavigator({
   DecksList: {
     screen: DecksList,
@@ -58,14 +60,26 @@ const Tabs = TabNavigator({
   }
 )
 
+const Stack = StackNavigator({
+  DecksList: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null
+    }
+  },
+  Deck: {
+    screen: Deck
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <SafeAreaView style={styles.safeArea}>
+        <View style={styles.safeArea}>
           <FlashcardsStatusBar backgroundColor={blue} barStyle="light-content"/>
-          <Tabs />
-        </SafeAreaView>
+          <Stack />
+        </View>
       </Provider>
     );
   }
