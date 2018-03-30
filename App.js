@@ -47,6 +47,7 @@ const Tabs = TabNavigator({
       activeTintColor: Platform.OS === 'ios' ? blue : white,
       style: {
         height: 56,
+        marginTop: (Platform.OS == 'ios') ? 0 : 24,
         backgroundColor: Platform.OS === 'ios' ? white : blue,
         shadowColor: 'rgba(0, 0, 0, 0.24)',
         shadowOffset: {
@@ -77,7 +78,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.safeArea}>
-          <FlashcardsStatusBar backgroundColor={blue} barStyle="light-content"/>
+          {/* <FlashcardsStatusBar backgroundColor={blue} barStyle="light-content"/> */}
           <Stack />
         </View>
       </Provider>

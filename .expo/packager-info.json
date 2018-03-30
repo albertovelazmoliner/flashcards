@@ -1,5 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 16907
+  "packagerPid": 37048,
+  "expoServerNgrokUrl": "https://9z-75d.albertovelaz.flashcards.exp.direct",
+  "packagerNgrokUrl": "https://packager.9z-75d.albertovelaz.flashcards.exp.direct",
+  "ngrokPid": 37079
 }

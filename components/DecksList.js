@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, StyleSheet, AsyncStorage, StatusBar } from 'react-native'
+import { View, Text, FlatList, StyleSheet, AsyncStorage, StatusBar, Platform } from 'react-native'
 import DeckItem from './DeckItem'
 import { getDecks } from '../utils/api' 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -55,6 +55,7 @@ class DecksList extends Component {
           }
           ListEmptyComponent={emptyComponent}
           keyExtractor={(item, index) => index}
+          style={{marginTop: (Platform.OS == 'ios') ? 24 : 0}}
         />
       </View>
     )
