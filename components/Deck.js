@@ -19,21 +19,24 @@ class Deck extends Component {
   }
 
   componentDidMount() {
+  
+  }
+
+  handleAdd = () => {
+    const { deck } = this.props.navigation.state.params
+    console.log(deck)
+    this.props.navigation.navigate('AddCard', { title:'Add Card', deckTitle: deck.title })
+  }
+
+  handleStart = () => {
+
   }
 
   render() {
 
     const { title, questions } = this.props.navigation.state.params.deck
-
+    
     var cardsLabel = `${questions.length} cards`
-
-    const handleAdd = () => {
-
-    }
-
-    const handleStart = () => {
-
-    }
 
     return (
       <View>
@@ -48,7 +51,7 @@ class Deck extends Component {
         </TouchableOpacity>
         <TouchableOpacity 
           style={[styles.button]}
-          onPress={this.handleStart}>
+          onPress={() => this.handleStart}>
           <Text style={styles.buttonText}>
             Start Quiz
           </Text>
