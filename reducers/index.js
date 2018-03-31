@@ -1,8 +1,9 @@
 import { RECEIVE_DECKS,
          ADD_DECK,
-         ADD_QUESTION } from '../actions'
+         ADD_CARD } from '../actions'
 
 function decks (state = {}, action) {
+  console.log(action)
   switch (action.type) {
     case RECEIVE_DECKS :
       return {
@@ -17,17 +18,15 @@ function decks (state = {}, action) {
           questions: []
         }
       }
-    case ADD_QUESTION : 
+    case ADD_CARD :
+      console.log(state[action.deckTitle].questions)
+      const questions = state[action.deckTitle].questions
       return {
         ...state,
         [action.deckTitle]: {
-          questions:[
-            ...questions,
-            {
-              question: action.newQuestion.question,
-              answer: action.newQuestion.answer
-            }
-          ]
+          ...state[action.deckTitle],
+          questions : [...questions,
+                      action.card]
         }
       }
     default: 
