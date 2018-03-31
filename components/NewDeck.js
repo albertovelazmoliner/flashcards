@@ -16,7 +16,7 @@ const deckTitle = t.struct({
 
 const optionsForm = {
   fields: {
-    title: {
+    [label]: {
       error: 'The title can not be empty'
     }
   },
@@ -30,13 +30,15 @@ class NewDeck extends Component {
 
   handleSubmit = () => {
     const value = this._form.getValue() // use that ref to get the form value
-    console.log('value: ', value[label])
-    this.props.dispatch(addDeck(value[label]))
+    if (value) {
+      console.log('value: ', value[label])
+      this.props.dispatch(addDeck(value[label]))
 
-    saveDeck(value[label]).then(() => {
-      this.setState({newName: null})
-      this.props.navigation.navigate('DecksList')
-    }).catch(error => console.log(error))
+      saveDeck(value[label]).then(() => {
+        this.setState({newName: null})
+        this.props.navigation.navigate('DecksList')
+      }).catch(error => console.log(error))
+    }
   }
   
   render() {
