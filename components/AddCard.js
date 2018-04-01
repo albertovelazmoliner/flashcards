@@ -62,7 +62,7 @@ class AddCard extends Component {
       addCardToDeck(title, card).then(() => {
          this.setState({question: null, answer: null})
          console.log(this.props.navigation)
-         //this.props.navigation.navigate.goBack('Deck')
+         this.props.navigation.goBack()
        }).catch(error => console.log(error))
     }
     
