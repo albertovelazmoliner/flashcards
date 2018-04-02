@@ -12,10 +12,6 @@ class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.deck.title
-      // headerStyle: {
-      //   height: Header.HEIGHT - Constants.statusBarHeight * 2,
-      //   paddingBottom: 16
-      // }
     }  
   }
 
