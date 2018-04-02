@@ -1,8 +1,11 @@
+import { combineReducers } from 'redux'
 import { RECEIVE_DECKS,
          ADD_DECK,
-         ADD_CARD } from '../actions'
+         ADD_CARD,
+         SELECT_DECK,
+         DESELECT_DECK } from '../actions'
 
-function decks (state = {}, action) {
+const decks = (state = {}, action) => {
   console.log(action)
   switch (action.type) {
     case RECEIVE_DECKS :
@@ -34,4 +37,35 @@ function decks (state = {}, action) {
   }
 }
 
-export default decks
+
+const selectedDeck = (state = {
+  deck: null
+}, action) =>  {
+  switch (action.type) {
+    case SELECT_DECK:
+      return {
+        deck: action.deck
+      }
+    case DESELECT_DECK:
+      return {
+        deck: null
+      }
+    case ADD_CARD :
+      const questions = state.deck.questions
+      return {
+        deck: {
+           ...state.deck,
+           questions: [ ...questions,
+              action.card
+           ]
+        }
+      }
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  decks,
+  selectedDeck
+})
