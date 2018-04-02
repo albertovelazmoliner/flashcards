@@ -4,7 +4,7 @@ import DeckItem from './DeckItem'
 import { getDecks } from '../utils/api' 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white } from '../utils/colors'
-import { receiveDecks } from '../actions'
+import { receiveDecks, selectDeck } from '../actions'
 import { connect } from 'react-redux'
 import { Constants } from 'expo'
 
@@ -34,7 +34,9 @@ class DecksList extends Component {
   }
 
   onPressItem = (deck) => {
+    const {dispatch } = this.props
     console.log(deck)
+    dispatch(selectDeck(deck))
     this.props.navigation.navigate('Deck', { deck })
   }
 
@@ -72,9 +74,9 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps (decks) {
+function mapStateToProps (state) {
   return {
-    decks
+    decks : state.decks
   }
 }
 
