@@ -3,14 +3,15 @@ import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-nativ
 import PropTypes from 'prop-types'
 import { black, white } from '../utils/colors'
 import { Constants } from 'expo'
-import { Header } from 'react-navigation';
+import { Header } from 'react-navigation'
+import { connect } from 'react-redux'
 
 
 class Deck extends Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.state.params.deck.title,
+      title: navigation.state.params.deck.title
       // headerStyle: {
       //   height: Header.HEIGHT - Constants.statusBarHeight * 2,
       //   paddingBottom: 16
@@ -23,9 +24,7 @@ class Deck extends Component {
   }
 
   handleAdd = () => {
-    const { deck } = this.props.navigation.state.params
-    console.log(deck)
-    this.props.navigation.navigate('AddCard', { title:'Add Card', deckTitle: deck.title })
+    this.props.navigation.navigate('AddCard', { title:'Add Card', deckTitle: this.props.deck.title })
   }
 
   handleStart = () => {
@@ -34,7 +33,7 @@ class Deck extends Component {
 
   render() {
 
-    const { title, questions } = this.props.navigation.state.params.deck
+    const { title, questions } = this.props.deck
     
     var cardsLabel = `${questions.length} cards`
 
@@ -91,4 +90,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Deck
+function mapStateToProps (state) {
+  console.log(state)
+  return {
+    deck : state.selectedDeck.deck
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Deck)
