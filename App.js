@@ -8,6 +8,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import DecksList from './components/DecksList'
 import NewDeck from './components/NewDeck'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 import Deck from './components/Deck'
 import { white, blue } from './utils/colors'
 import { Ionicons } from '@expo/vector-icons'
@@ -74,6 +75,9 @@ const Stack = StackNavigator({
   },
   AddCard: {
     screen: AddCard
+  },
+  Quiz: {
+    screen: Quiz
   }
 })
 

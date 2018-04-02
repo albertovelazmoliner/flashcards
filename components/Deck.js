@@ -24,7 +24,7 @@ class Deck extends Component {
   }
 
   handleStart = () => {
-
+    this.props.navigation.navigate('Quiz')
   }
 
   render() {
@@ -46,7 +46,7 @@ class Deck extends Component {
         </TouchableOpacity>
         <TouchableOpacity 
           style={[styles.button]}
-          onPress={() => this.handleStart}>
+          onPress={this.handleStart}>
           <Text style={styles.buttonText}>
             Start Quiz
           </Text>
