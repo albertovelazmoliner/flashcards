@@ -15,10 +15,6 @@ class Deck extends Component {
     }  
   }
 
-  componentDidMount() {
-  
-  }
-
   handleAdd = () => {
     this.props.navigation.navigate('AddCard', { title:'Add Card', deckTitle: this.props.deck.title })
   }
