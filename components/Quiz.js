@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import { black, white } from '../utils/colors'
+import { black, white, green, red } from '../utils/colors'
 import { Constants } from 'expo'
 import { Header } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -12,7 +12,9 @@ class Quiz extends Component {
   state = {
     questionsNumber: 0,
     questionOrder: 0,
-    questions: []
+    questions: [],
+    showAnswer: false,
+    points: 0
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -29,28 +31,76 @@ class Quiz extends Component {
     this.setState( { questionsNumber, questionOrder, questions })
   }
 
-  handle = () => {
-    
+  handleCheck = () => {
+    this.setState({ showAnswer: true })
   }
 
-  handle = () => {
+  handleYes = () => {
+    const { questionOrder,
+            questionsNumber,
+            questions,
+            showAnswer,
+            points } = this.state
+    if (questionOrder < questionsNumber) {
+      const next = questionOrder + 1
+      const pointsNow = points + 1
+      this.setState({
+        questionOrder: next,
+        showAnswer: false,
+        points: pointsNow
+      })
+    } else {
+      
+    }
+  }
 
+  handleNo = () => {
+    const { questionOrder, questionsNumber, questions, showAnswer } = this.state
+    if (questionsNumber < questionOrder) {
+      const next = questionOrder + 1
+      this.setState({
+        questionOrder: next,
+        showAnswer: false
+      })
+    } else {
+      
+    }
   }
 
   render() {
     console.log(this.state)
-    const { questionOrder, questionsNumber, questions } = this.state
+    const { questionOrder, questionsNumber, questions, showAnswer } = this.state
     return (
       <View>
         <Text>{questionOrder} / {questionsNumber}</Text>
-        <Text style={[styles.centerText]}>{(questionsNumber > 0) ? questions[questionOrder - 1]['question'] : ""}</Text>
-        <TouchableOpacity
+        {!showAnswer && <Text style={[styles.centerText]}>{(questionsNumber > 0) ? questions[questionOrder - 1]['question'] : ""}</Text>}
+        {showAnswer && <Text style={[styles.centerText]}>{questions[questionOrder - 1]['answer']}</Text>}
+        {!showAnswer && <TouchableOpacity
           style={[styles.button]}
-          onPress={this.handleAdd}>
+          onPress={this.handleCheck}>
           <Text style={styles.buttonText}>
-            Answer
+            Show Answer
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
+        {showAnswer && 
+          <View>
+            <Text style={[styles.centerText]}>Answer</Text>
+            <TouchableOpacity
+              style={[styles.buttonGreen]}
+              onPress={this.handleYes}>
+              <Text style={styles.buttonText}>
+                Correct
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.buttonRed]}
+              onPress={this.handleYes}>
+              <Text style={styles.buttonText}>
+                Incorrect
+              </Text>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
     )
   }
@@ -76,6 +126,20 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     backgroundColor: black,
+    alignSelf: 'center',
+    borderRadius: 5,
+    margin: 20,
+  },
+  buttonGreen: {
+    padding: 10,
+    backgroundColor: green,
+    alignSelf: 'center',
+    borderRadius: 5,
+    margin: 20,
+  },
+  buttonRed: {
+    padding: 10,
+    backgroundColor: red,
     alignSelf: 'center',
     borderRadius: 5,
     margin: 20,
