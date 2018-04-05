@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
 import { black, white } from '../utils/colors'
 import t from 'tcomb-form-native'
-import { saveDeck } from '../utils/api'
+import { saveDeck, getDeck } from '../utils/api'
 import { connect } from 'react-redux'
-import { addDeck } from '../actions'
+import { addDeck, selectDeck } from '../actions'
 
 const Form = t.form.Form;
 
@@ -34,9 +34,13 @@ class NewDeck extends Component {
       console.log('value: ', value[label])
       this.props.dispatch(addDeck(value[label]))
 
-      saveDeck(value[label]).then(() => {
+      saveDeck(value[label])
+      .then(() => getDeck(value[label]))
+      .then( deck => {
         this.setState({newName: null})
-        this.props.navigation.navigate('DecksList')
+        this.props.dispatch(selectDeck(deck))
+        //this.props.navigation.navigate('DecksList')
+        this.props.navigation.navigate('Deck', { deck })
       }).catch(error => console.log(error))
     }
   }
