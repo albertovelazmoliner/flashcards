@@ -9,8 +9,7 @@ export const getDecks = () =>  {
 export const getDeck = id => {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
   .then(results => {
-    console.log(results)
-    return results[id]
+    return JSON.parse(results)[id]
   })
 }
 
