@@ -16,6 +16,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { Constants } from 'expo'
+import { setLocalNotification } from './utils/helper';
 
 function FlashcardsStatusBar ( {backgroundColor, ...props}) {
   return (
@@ -82,6 +83,11 @@ const Stack = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
