@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white, green, red } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 import { Constants } from 'expo'
 import { Header, NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -68,6 +69,8 @@ class Quiz extends Component {
   }
 
   finishQuiz = () => {
+    clearLocalNotification()
+      .then(setLocalNotification())
     const { questionOrder, questionsNumber, points} = this.state
     const percentage = (points / questionsNumber) * 100
     Alert.alert(
