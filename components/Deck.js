@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white } from '../utils/colors'
 import { Constants } from 'expo'
@@ -20,7 +20,18 @@ class Deck extends Component {
   }
 
   handleStart = () => {
-    this.props.navigation.navigate('Quiz')
+    if (this.props.deck.questions.length == 0) {
+      Alert.alert(
+        'Warning',
+        'You have not added any question yet',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')}
+        ],
+        { cancelable: false }
+      )
+    } else {
+      this.props.navigation.navigate('Quiz')
+    }
   }
 
   render() {
