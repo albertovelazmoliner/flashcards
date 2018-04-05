@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white, green, red } from '../utils/colors'
 import { Constants } from 'expo'
-import { Header } from 'react-navigation'
+import { Header, NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 
 
@@ -50,7 +50,7 @@ class Quiz extends Component {
         points: pointsNow
       })
     } else {
-      
+      this.finishQuiz()
     }
   }
 
@@ -63,8 +63,22 @@ class Quiz extends Component {
         showAnswer: false
       })
     } else {
-      
+      this.finishQuiz()
     }
+  }
+
+  finishQuiz = () => {
+    const { questionOrder, questionsNumber, points} = this.state
+    const percentage = (points / questionsNumber) * 100
+    Alert.alert(
+      'You finished the Quiz',
+      `You got ${percentage}% of the questions right.`,
+      [
+        {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false }) },
+        {text: 'Go to the deck', onPress: () => this.props.navigation.goBack() },
+      ],
+      { cancelable: false }
+    )
   }
 
   render() {
