@@ -58,13 +58,14 @@ class Quiz extends Component {
         points: pointsNow
       })
     } else {
-      this.setState({ points: points + 1}, this.finishQuiz)
+      const lastPoints = points + 1
+      this.setState({ points: lastPoints}, this.finishQuiz)
     }
   }
 
   handleNo = () => {
     const { questionOrder, questionsNumber, questions, showAnswer } = this.state
-    if (questionsNumber < questionOrder) {
+    if (questionOrder < questionsNumber) {
       const next = questionOrder + 1
       this.setState({
         questionOrder: next,
@@ -80,15 +81,20 @@ class Quiz extends Component {
       .then(setLocalNotification())
     const { questionOrder, questionsNumber, points} = this.state
     const percentage = (points / questionsNumber) * 100
+    const resultTruncated = this.truncate(percentage ,2)
     Alert.alert(
-      `You finished the Quiz\nYou got ${percentage}% of the questions right.`,
+      `You finished the Quiz\nYou got ${resultTruncated}% of the questions right.`,
       '',
       [
-        {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false }) },
+        {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false, points: 0 }) },
         {text: 'Go to the deck', onPress: () => this.props.navigation.goBack() },
       ],
       { cancelable: false }
     )
+  }
+
+  truncate (num, places) {
+    return Math.trunc(num * Math.pow(10, places)) / Math.pow(10, places);
   }
 
   render() {
@@ -120,7 +126,7 @@ class Quiz extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.buttonRed]}
-              onPress={this.handleYes}>
+              onPress={this.handleNo}>
               <Text style={styles.buttonText}>
                 Incorrect
               </Text>
