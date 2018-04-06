@@ -80,6 +80,10 @@ const Stack = StackNavigator({
   Quiz: {
     screen: Quiz
   }
+}, {
+  navigationOptions: {
+    headerTintColor: blue
+  }
 })
 
 export default class App extends React.Component {
