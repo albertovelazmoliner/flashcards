@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
-import { black, white } from '../utils/colors'
+import { black, white, green, blue } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { addCardToDeck } from '../utils/api'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
 
+var _ = require('lodash')
+
 const Form = t.form.Form;
+
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
+stylesheet.textbox.normal.color = blue;
+stylesheet.textbox.error.color = blue;
+stylesheet.textbox.normal.borderColor = blue
 
 const label_a = 'Question',
       label_b = 'Answer'
@@ -21,11 +28,13 @@ const optionsForm = {
   fields: {
     question: {
       error: 'The question can not be empty',
-      multiline: true
+      multiline: true,
+      stylesheet: stylesheet
     },
     answer: {
       error: 'The question can not be empty',
-      multiline: true
+      multiline: true,
+      stylesheet: stylesheet
     }
   },
   auto: 'placeholders'
@@ -69,7 +78,7 @@ class AddCard extends Component {
     console.log('Data deck title ==> ' + deckTitle)
     return (
       <View style={[styles.center]} >
-        <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12}}>
+        <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12, color: blue}}>
           What is your new card?
         </Text>
         <Form 
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: black,
+    backgroundColor: blue,
     alignSelf: 'center',
     borderRadius: 5,
     margin: 20,
