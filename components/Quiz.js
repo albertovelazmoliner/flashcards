@@ -26,10 +26,17 @@ class Quiz extends Component {
 
   componentDidMount() {
     const { title, questions } = this.props.deck
-    //debugger
+    this.shuffleArray(questions)
     const questionsNumber = questions.length
     const questionOrder = 1
     this.setState( { questionsNumber, questionOrder, questions })
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 
   handleCheck = () => {
