@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert, Button, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white, green, red, blue } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helper'
@@ -83,7 +83,7 @@ class Quiz extends Component {
     const percentage = (points / questionsNumber) * 100
     const resultTruncated = this.truncate(percentage ,2)
     Alert.alert(
-      `You finished the Quiz\nYou got ${resultTruncated}% of the questions right.`,
+      `You got ${resultTruncated}% of the questions right.`,
       '',
       [
         {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false, points: 0 }) },
@@ -107,16 +107,30 @@ class Quiz extends Component {
         </View>
         {!showAnswer && <Text style={[styles.textQuestionAnswer]}>{(questionsNumber > 0) ? questions[questionOrder - 1]['question'] : ""}</Text>}
         {showAnswer && <Text style={[styles.textQuestionAnswer]}>{questions[questionOrder - 1]['answer']}</Text>}
-        {!showAnswer && <TouchableOpacity
-          style={[styles.button]}
-          onPress={this.handleCheck}>
-          <Text style={styles.buttonText}>
-            Show Answer
-          </Text>
-        </TouchableOpacity>}
+        {!showAnswer && 
+          <View>
+            {Platform.OS === 'ios' && 
+              <TouchableOpacity
+                style={[styles.button]}
+                onPress={this.handleCheck}>
+                <Text style={styles.buttonText}>
+                  Show Answer
+                </Text>
+              </TouchableOpacity>}
+            {Platform.OS != 'ios' &&
+              <View style={{margin: 16}}>
+                <Button
+                  onPress={this.handleCheck}
+                  title="Show Answer"
+                  color={blue}>
+                </Button>
+              </View>}
+          </View>}
         {showAnswer && 
           <View>
             <Text style={[styles.centerText]}>Answer</Text>
+            {Platform.OS === 'ios' &&
+            <View> 
             <TouchableOpacity
               style={[styles.buttonGreen]}
               onPress={this.handleYes}>
@@ -131,6 +145,24 @@ class Quiz extends Component {
                 Incorrect
               </Text>
             </TouchableOpacity>
+            </View>}
+            {Platform.OS != 'ios' &&
+            <View>
+              <View style={{margin: 16}}> 
+              <Button
+                onPress={this.handleYes}
+                  title="Correct"
+                  color={green}>
+              </Button>
+              </View>
+              <View style={{margin: 16}}> 
+                <Button
+                  onPress={this.handleNo}
+                    title="Incorrect"
+                    color={red}>
+                </Button>
+              </View>
+            </View>}
           </View>
         }
       </View>
