@@ -58,7 +58,7 @@ class Quiz extends Component {
         points: pointsNow
       })
     } else {
-      this.finishQuiz()
+      this.setState({ points: points + 1}, this.finishQuiz)
     }
   }
 
