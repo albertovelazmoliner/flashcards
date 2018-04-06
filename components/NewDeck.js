@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
-import { black, white } from '../utils/colors'
+import { black, white, blue } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { saveDeck, getDeck } from '../utils/api'
 import { connect } from 'react-redux'
 import { addDeck, selectDeck } from '../actions'
 
+var _ = require('lodash')
+
 const Form = t.form.Form;
+
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
+stylesheet.textbox.normal.color = blue;
+stylesheet.textbox.error.color = blue;
+stylesheet.textbox.normal.borderColor = blue
 
 const label = 'Deck Title'
 
@@ -17,7 +24,8 @@ const deckTitle = t.struct({
 const optionsForm = {
   fields: {
     [label]: {
-      error: 'The title can not be empty'
+      error: 'The title can not be empty',
+      stylesheet: stylesheet
     }
   },
   auto: 'placeholders'
@@ -47,7 +55,7 @@ class NewDeck extends Component {
   render() {
     return (
       <View style={[styles.center]} >
-        <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12}}>
+        <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12, color: blue}}>
           What is the title of your new deck?
         </Text>
         <Form 
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: black,
+    backgroundColor: blue,
     alignSelf: 'center',
     borderRadius: 5,
     margin: 20,
