@@ -81,8 +81,8 @@ class Quiz extends Component {
     const { questionOrder, questionsNumber, points} = this.state
     const percentage = (points / questionsNumber) * 100
     Alert.alert(
-      'You finished the Quiz',
-      `You got ${percentage}% of the questions right.`,
+      `You finished the Quiz\nYou got ${percentage}% of the questions right.`,
+      '',
       [
         {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false }) },
         {text: 'Go to the deck', onPress: () => this.props.navigation.goBack() },
