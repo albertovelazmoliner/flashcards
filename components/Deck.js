@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert, Button, Platform } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white, blue } from '../utils/colors'
 import { Constants } from 'expo'
@@ -44,20 +44,40 @@ class Deck extends Component {
       <View>
         <Text style={[styles.centerText, {color: blue}]}>{title}</Text>
         <Text style={[styles.centerText, {color: blue}]}>{cardsLabel}</Text>
-        <TouchableOpacity 
-          style={[styles.button]}
-          onPress={this.handleAdd}>
-          <Text style={styles.buttonText}>
-            Add card
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={[styles.button]}
-          onPress={this.handleStart}>
-          <Text style={styles.buttonText}>
-            Start Quiz
-          </Text>
-        </TouchableOpacity>
+        {(Platform.OS === 'ios') && 
+        <View>
+          <TouchableOpacity
+            style={[styles.button]}
+            onPress={this.handleAdd}>
+            <Text style={styles.buttonText}>
+              Add card
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.button]}
+            onPress={this.handleStart}>
+            <Text style={styles.buttonText}>
+              Start Quiz
+            </Text>
+          </TouchableOpacity>
+        </View>}
+        {(Platform.OS != 'ios') &&
+        <View> 
+          <View style={{margin: 16}}>
+            <Button 
+              onPress={this.handleAdd}
+              title='Add card'
+              color={blue}>
+            </Button>
+          </View>
+          <View style={{margin: 16}}>
+            <Button 
+              onPress={this.handleStart}
+              title='Start Quiz'
+              color={blue}>
+            </Button>
+          </View>
+        </View>}
       </View>
     )
   }
