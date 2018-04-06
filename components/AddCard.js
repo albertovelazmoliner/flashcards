@@ -41,10 +41,6 @@ class AddCard extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.title
-      // headerStyle: {
-      //   height: Header.HEIGHT - Constants.statusBarHeight * 2,
-      //   paddingBottom: 16
-      // }
     }  
   }
 
