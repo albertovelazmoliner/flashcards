@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Button } from 'react-native'
 import { black, white, green, blue } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { addCardToDeck } from '../utils/api'
@@ -87,13 +87,11 @@ class AddCard extends Component {
           type={Card}
           value={this.state}
           options={optionsForm} />
-        <TouchableOpacity 
-          style={[styles.button]}
-          onPress={this.handleSubmit}>
-          <Text style={styles.buttonText}>
-            Submit
-          </Text>
-        </TouchableOpacity>
+        <Button
+          onPress={this.handleSubmit}
+          title='Submit'
+          color={blue}>
+        </Button>
       </View>
     )
   }
