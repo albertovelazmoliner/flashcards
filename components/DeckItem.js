@@ -33,12 +33,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 1,
     height: 80,
-    borderRadius: 5
   }
 })
 
