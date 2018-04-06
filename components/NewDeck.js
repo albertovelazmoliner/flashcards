@@ -39,7 +39,6 @@ class NewDeck extends Component {
       .then( deck => {
         this.setState({newName: null})
         this.props.dispatch(selectDeck(deck))
-        //this.props.navigation.navigate('DecksList')
         this.props.navigation.navigate('Deck', { deck })
       }).catch(error => console.log(error))
     }
