@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import PropTypes from 'prop-types'
-import { black, white } from '../utils/colors'
+import { black, white, blue } from '../utils/colors'
 import { Constants } from 'expo'
 import { Header } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -42,8 +42,8 @@ class Deck extends Component {
 
     return (
       <View>
-        <Text style={[styles.centerText]}>{title}</Text>
-        <Text style={[styles.centerText]}>{cardsLabel}</Text>
+        <Text style={[styles.centerText, {color: blue}]}>{title}</Text>
+        <Text style={[styles.centerText, {color: blue}]}>{cardsLabel}</Text>
         <TouchableOpacity 
           style={[styles.button]}
           onPress={this.handleAdd}>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: black,
+    backgroundColor: blue,
     alignSelf: 'center',
     borderRadius: 5,
     margin: 20,
