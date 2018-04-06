@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert } from 'react-native'
 import PropTypes from 'prop-types'
-import { black, white, green, red } from '../utils/colors'
+import { black, white, green, red, blue } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 import { Constants } from 'expo'
 import { Header, NavigationActions } from 'react-navigation'
@@ -96,9 +96,11 @@ class Quiz extends Component {
     const { questionOrder, questionsNumber, questions, showAnswer } = this.state
     return (
       <View>
-        <Text>{questionOrder} / {questionsNumber}</Text>
-        {!showAnswer && <Text style={[styles.centerText]}>{(questionsNumber > 0) ? questions[questionOrder - 1]['question'] : ""}</Text>}
-        {showAnswer && <Text style={[styles.centerText]}>{questions[questionOrder - 1]['answer']}</Text>}
+        <View style={styles.questionsOrder}>
+          <Text style={{color: white}}>{questionOrder} / {questionsNumber}</Text>
+        </View>
+        {!showAnswer && <Text style={[styles.textQuestionAnswer]}>{(questionsNumber > 0) ? questions[questionOrder - 1]['question'] : ""}</Text>}
+        {showAnswer && <Text style={[styles.textQuestionAnswer]}>{questions[questionOrder - 1]['answer']}</Text>}
         {!showAnswer && <TouchableOpacity
           style={[styles.button]}
           onPress={this.handleCheck}>
@@ -135,11 +137,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between'
   },
-  centerText: {
-    fontSize:20,
+  textQuestionAnswer: {
+    fontSize:16,
     alignSelf:'center',
     marginTop: 20,
-    marginBottom: 20
+    marginBottom: 8,
+    fontStyle: 'italic',
+    backgroundColor: white,
+    padding: 10,
+    minWidth: 240,
+    maxWidth: 240,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: blue
+  },
+  centerText: {
+    fontSize: 20,
+    alignSelf: 'center',
+    marginBottom: 20,
+    color: blue
   },
   center: {
     flex: 1,
@@ -149,7 +165,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    backgroundColor: black,
+    backgroundColor: blue,
     alignSelf: 'center',
     borderRadius: 5,
     margin: 20,
@@ -171,6 +187,13 @@ const styles = StyleSheet.create({
   buttonText :{
     color: white,
     fontSize: 20,
+  },
+  questionsOrder: {
+    backgroundColor: blue,
+    margin: 10,
+    padding: 5,
+    borderRadius: 5,
+    alignSelf: 'flex-start'
   }
 })
 
