@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-import { white } from '../utils/colors'
+import { white, blue } from '../utils/colors'
 
 class DeckItem extends Component {
 
@@ -17,8 +17,8 @@ class DeckItem extends Component {
     return (
       <TouchableOpacity onPress={() => this.props.onPress(deck)}>
         <View style={[styles.card, {backgroundColor: white}]}>
-          <Text>{title}</Text>
-          <Text>
+          <Text style={{color: blue}}>{title}</Text>
+          <Text style={{color: blue}}>
             {questions ? `${questions.length} questions` : "No questions" }
           </Text>
         </View>
