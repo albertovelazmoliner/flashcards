@@ -5,34 +5,13 @@ import t from 'tcomb-form-native'
 import { saveDeck, getDeck } from '../utils/api'
 import { connect } from 'react-redux'
 import { addDeck, selectDeck } from '../actions'
+import { updateFormStyle } from '../utils/helper';
 
 var _ = require('lodash')
 
 const Form = t.form.Form;
 
-const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
-
-if (Platform.OS === 'ios') {
-  stylesheet.textbox.normal.color = blue;
-  stylesheet.textbox.error.color = blue;
-  stylesheet.textbox.normal.borderColor = blue
-} else {
-  stylesheet.textbox.normal.borderWidth = 0;
-  stylesheet.textbox.error.borderWidth = 0;
-  stylesheet.textbox.normal.marginBottom = 0;
-  stylesheet.textbox.error.marginBottom = 0;
-
-  stylesheet.textboxView.normal.borderWidth = 0;
-  stylesheet.textboxView.error.borderWidth = 0;
-  stylesheet.textboxView.normal.borderRadius = 0;
-  stylesheet.textboxView.error.borderRadius = 0;
-  stylesheet.textboxView.normal.borderBottomWidth = 1;
-  stylesheet.textboxView.error.borderBottomWidth = 1;
-  stylesheet.textboxView.normal.borderColor = blue;
-  stylesheet.textboxView.error.borderColor = red;
-  stylesheet.textbox.normal.marginBottom = 5;
-  stylesheet.textbox.error.marginBottom = 5;
-}
+const stylesheet = updateFormStyle(_.cloneDeep(t.form.Form.stylesheet))
 
 const label = 'Deck Title'
 
