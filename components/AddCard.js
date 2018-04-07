@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Button, Platform } from 'react-native'
-import { black, white, green, blue, red } from '../utils/colors'
+import { black, white, green, blue, red, blueDisabled } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { addCardToDeck } from '../utils/api'
 import { connect } from 'react-redux'
