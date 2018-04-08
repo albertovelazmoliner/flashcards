@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert, Button, Platform } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert, Button, Platform, Modal, Animated } from 'react-native'
 import PropTypes from 'prop-types'
 import { black, white, green, red, blue } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helper'
@@ -15,7 +15,10 @@ class Quiz extends Component {
     questionOrder: 0,
     questions: [],
     showAnswer: false,
-    points: 0
+    points: 0,
+    modalVisible: false,
+    result: '',
+    bounceValue: new Animated.Value(1)
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -79,18 +82,14 @@ class Quiz extends Component {
   finishQuiz = () => {
     clearLocalNotification()
       .then(setLocalNotification())
-    const { questionOrder, questionsNumber, points} = this.state
+    const { questionOrder, questionsNumber, points, bounceValue} = this.state
     const percentage = (points / questionsNumber) * 100
     const resultTruncated = this.truncate(percentage ,2)
-    Alert.alert(
-      `You got ${resultTruncated}% of the questions right.`,
-      '',
-      [
-        {text: 'Start again the quiz', onPress: () =>  this.setState({ questionOrder: 1, showAnswer: false, points: 0 }) },
-        {text: 'Go to the deck', onPress: () => this.props.navigation.goBack() },
-      ],
-      { cancelable: false }
-    )
+    this.setState({ modalVisible: true, result: resultTruncated })
+    Animated.sequence([
+      Animated.timing(bounceValue, { duration: 200, toValue: 1.04}),
+      Animated.spring(bounceValue, { toValue: 1, friction: 4})
+    ]).start()
   }
 
   truncate (num, places) {
@@ -99,9 +98,32 @@ class Quiz extends Component {
 
   render() {
     console.log(this.state)
-    const { questionOrder, questionsNumber, questions, showAnswer } = this.state
+    const { questionOrder, questionsNumber, questions, showAnswer, result, bounceValue} = this.state
     return (
       <View>
+        <Modal
+          animationType="none"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => this.props.navigation.goBack()}>
+          <View style={[styles.container, {backgroundColor: white}]}>
+            <Animated.Text style={[{textAlign: 'center', fontSize: 34, color: black},{transform: [{scale: bounceValue}]}]}>
+              You got {result}% of the questions right.
+            </Animated.Text>
+            <View style={{margin: 16}}>
+              <Button
+                onPress={() =>  this.setState({ questionOrder: 1, showAnswer: false, points: 0, modalVisible: false, result:'' }) }
+                title="Start again the quiz"
+                color={blue}/>
+            </View>
+            <View style={{margin: 16}}>
+              <Button
+                onPress={() => this.props.navigation.goBack()}
+                title="Go to the deck"
+                color={blue}/>
+            </View>
+          </View>
+        </Modal>
         <View style={styles.questionsOrder}>
           <Text style={{color: white}}>{questionOrder} / {questionsNumber}</Text>
         </View>
@@ -173,7 +195,8 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textQuestionAnswer: {
     fontSize:16,
