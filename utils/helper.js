@@ -1,6 +1,6 @@
 import { AsyncStorage, Platform } from 'react-native'
 import { Permissions, Notifications } from 'expo'
-import { blue } from '../utils/colors'
+import { blue, red } from '../utils/colors'
 
 const NOTIFICATION_KEY = 'velazStorage:notifications'
 
