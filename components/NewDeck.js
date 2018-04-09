@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Button, Platform } from 'react-native'
+import { Text,
+         TextInput,
+         TouchableOpacity,
+         StyleSheet,
+         StatusBar,
+         Button,
+         Platform,
+         KeyboardAvoidingView } from 'react-native'
 import { black, white, blue, blueDisabled, red } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { saveDeck, getDeck } from '../utils/api'
@@ -54,7 +61,7 @@ class NewDeck extends Component {
   
   render() {
     return (
-      <View style={[styles.center]} >
+      <KeyboardAvoidingView style={[styles.center]} behavior="padding">
         <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12, color: blue}}>
           What is the title of your new deck?
         </Text>
@@ -69,7 +76,7 @@ class NewDeck extends Component {
           color={blue}
           title='Submit'>
         </Button>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
