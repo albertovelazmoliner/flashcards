@@ -26,6 +26,8 @@ function FlashcardsStatusBar ( {backgroundColor, ...props}) {
   )
 }
 
+const tintColorPlatform = Platform.OS === 'ios' ? blue : white
+const backgroundColorPlatform = Platform.OS != 'ios' ? blue : white
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -82,7 +84,10 @@ const Stack = StackNavigator({
   }
 }, {
   navigationOptions: {
-    headerTintColor: blue
+    headerTintColor: tintColorPlatform,
+    headerStyle: {
+      backgroundColor: backgroundColorPlatform
+    }
   }
 })
 
