@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Button, Platform } from 'react-native'
+import { Text,
+         TextInput,
+         TouchableOpacity,
+         StyleSheet,
+         StatusBar,
+         Button,
+         Platform,
+         KeyboardAvoidingView } from 'react-native'
 import { black, white, green, blue, red, blueDisabled } from '../utils/colors'
 import t from 'tcomb-form-native'
 import { addCardToDeck } from '../utils/api'
@@ -78,7 +85,7 @@ class AddCard extends Component {
     const { deckTitle } = this.props.navigation.state.params
     console.log('Data deck title ==> ' + deckTitle)
     return (
-      <View style={[styles.center]} >
+      <KeyboardAvoidingView style={[styles.center]} behavior="padding" >
         <Text style={{fontSize: 34, textAlign: 'center', marginBottom: 12, color: blue}}>
           What is your new card?
         </Text>
@@ -93,7 +100,7 @@ class AddCard extends Component {
           title='Submit'
           color={blue}>
         </Button>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
