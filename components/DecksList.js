@@ -30,7 +30,6 @@ class DecksList extends Component {
 
     getDecks()
       .then(decks => dispatch(receiveDecks(decks)))
-    //AsyncStorage.clear()
   }
 
   onPressItem = (deck) => {
