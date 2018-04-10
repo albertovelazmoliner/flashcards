@@ -30,6 +30,7 @@ class DecksList extends Component {
 
     getDecks()
       .then(decks => dispatch(receiveDecks(decks)))
+      .catch(error => console.log(error))
   }
 
   onPressItem = (deck) => {
